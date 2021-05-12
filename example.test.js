@@ -3,8 +3,8 @@ const puppeteer = require('puppeteer')
 
 describe('Mi primer prueba abriendo un navegador',()=>{
 
-    it('debe abrir el navegador', async()=>{
-    const browser = await puppeteer.launch({ headless: false,slowMo:1000})
+    it('Abrir mediante Selector', async()=>{
+    const browser = await puppeteer.launch({ headless: true,slowMo:1000})
     const page = await browser.newPage()
     await page.goto('http://automationpractice.com/index.php')
     const algo = await page.waitForSelector('#block_top_menu > ul > li:nth-child(1) > a')
@@ -13,8 +13,8 @@ describe('Mi primer prueba abriendo un navegador',()=>{
     
     await browser.close()
     })
-    it('debe abrir el navegador', async()=>{
-        const browser = await puppeteer.launch({ headless: false,slowMo:1000})
+    it('abrir navegador con XPhat', async()=>{
+        const browser = await puppeteer.launch({ headless: true,slowMo:1000})
         const page = await browser.newPage()
         await page.goto('http://automationpractice.com/index.php')
         const algo = await page.waitForXPath('//*[@id="block_top_menu"]/ul/li[1]/a')
@@ -27,11 +27,11 @@ describe('Mi primer prueba abriendo un navegador',()=>{
 
 })
 
-it('debe abrir el navegador', async()=>{
-    const browser = await puppeteer.launch({ headless: false,slowMo:1000})
+it('funcion con css', async()=>{
+    const browser = await puppeteer.launch({ headless: true,slowMo:1000})
     const page = await browser.newPage()
     await page.coverage.startCSSCoverage()
-    await page.goto('http://automationpractice.com/index.php', {waitUntil: 'load'}) 
+    await page.evaluate(() => { const element = document.querySelector('#block_top_menu > ul > li.sfHoverForce > a'); });
     const cssCoverage = await page.coverage.stopCSSCoverage()
     
     await page.close()
